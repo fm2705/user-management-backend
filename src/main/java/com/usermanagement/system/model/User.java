@@ -1,5 +1,6 @@
 package com.usermanagement.system.model;
 
+//model that will interact with the UI
 public class User {
     private long id;
     private String firstName;
