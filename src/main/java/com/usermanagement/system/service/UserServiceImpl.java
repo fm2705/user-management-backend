@@ -61,6 +61,25 @@ public class UserServiceImpl implements UserService{
         return user;
     }
 
+    @Override
+    public boolean deleteUser(Long id) {
+        UserEntity user =  userRepository.findById(id).get();
+        userRepository.delete(user);
+        return true;
+    }
+
+    @Override
+    public User updateUser(Long id, User user) {
+        UserEntity userEntity =
+                userRepository.findById(id).get();
+        userEntity.setEmailId(user.getEmailId());
+        userEntity.setFirstName(user.getFirstName());
+        userEntity.setLastName(user.getLastName());
+
+        userRepository.save(userEntity);
+        return user;
+    }
+
 
 }
 

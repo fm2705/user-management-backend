@@ -5,7 +5,9 @@ import com.usermanagement.system.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @CrossOrigin(value = "http://localhost:3000")
@@ -34,6 +36,22 @@ public class UserController {
     public ResponseEntity<User> getUserById(@PathVariable("id") Long id) {
         User user = null;
         user = userService.getUserById(id);
+        return ResponseEntity.ok(user);
+    }
+
+    @DeleteMapping("/users/{id}")
+    public ResponseEntity<Map<String,Boolean>> deleteEmployee(@PathVariable("id") Long id) {
+        boolean deleted = false;
+        deleted =userService.deleteUser(id);
+        Map<String,Boolean> response = new HashMap<>();
+        response.put("deleted", deleted);
+        return ResponseEntity.ok(response);
+    }
+
+    @PutMapping("/users/{id}")
+    public ResponseEntity<User> updateUser(@PathVariable("id") Long id,
+                                           @RequestBody User user) {
+        user = userService.updateUser(id,user);
         return ResponseEntity.ok(user);
     }
 
