@@ -24,10 +24,17 @@ public class UserController {
 
         return userService.saveUser(user);
     }
-
+//get all users that are stored in the database
     @GetMapping("/users")
     public List<User> getAllUsers() {
         return userService.getAllUsers();
+    }
+
+    @GetMapping("/users/{id}")
+    public ResponseEntity<User> getUserById(@PathVariable("id") Long id) {
+        User user = null;
+        user = userService.getUserById(id);
+        return ResponseEntity.ok(user);
     }
 
 }
